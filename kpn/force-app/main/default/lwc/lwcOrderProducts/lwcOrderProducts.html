@@ -1,0 +1,32 @@
+
+<template>
+    <lightning-card title={title}>
+        <lightning-layout vertical-align="end" multiple-rows>
+            <lightning-layout if:true={dataHasItems}>
+                <lightning-layout-item flexibility="auto" padding="around-small">
+                    <lightning-datatable
+                        key-field="Id" 
+                        data={data} 
+                        columns={columns}
+                        sorted-by={sortedBy}
+                        sorted-direction={sortedDirection}
+                        onsort={updateColumnSorting}
+                        object-api-name="OrderItem"
+                        hide-checkbox-column="true">
+                    </lightning-datatable>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout-item size="2" padding="around-small">
+                <lightning-button label="Activate" disabled={disableButton} title="Activate" variant="brand" class="slds-m-left_x-small"
+                    onclick={activateOrder}>
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div if:true={showSpinner} class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
