@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title={title}>
+        <template if:true={dataHasItems}>
+            <div class="slds-align_absolute-center slds-m-around_medium">
+                <c-lwc-search-product all-data={allData} onfiltered={handleResults}></c-lwc-search-product>
+            </div>
+        </template>
+        <lightning-layout vertical-align="end" multiple-rows>
+            <lightning-layout if:true={dataHasItems}>
+                <lightning-layout-item flexibility="auto" padding="around-small">
+                    <lightning-datatable
+                        key-field="Id" 
+                        data={filteredData} 
+                        columns={columns}
+                        sorted-by={sortedBy}
+                        sorted-direction={sortedDirection}
+                        onsort={updateColumnSorting}
+                        selected-rows={selectedRows}>
+                    </lightning-datatable>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout-item size="2" padding="around-small">
+                <lightning-button label="Add" disabled={disableButton} title="Add" variant="brand" class="slds-m-left_x-small"
+                    onclick={addProducts}>
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <div if:true={showSpinner} class="slds-spinner_container">
+            <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
